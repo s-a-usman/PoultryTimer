@@ -1,7 +1,7 @@
-# Timer with Power-Loss Recovery and Alarm System
+Livestock feeding Timer System
 
 ## Overview
-This project is a timer system for automatic poultry feeding with power-loss recovery, user-friendly controls, and a built-in alarm feature. It is designed to operate as a countdown timer with the ability to store and recover its state in the event of a power interruption. The timer is equipped with an intuitive interface for setting the duration and visual feedback on the remaining time.
+This project is a timer system for automatic livestock feeding with power-loss recovery, user-friendly controls, and a built-in alarm feature. It is designed to operate as a countdown timer with the ability to store and recover its state in the event of a power interruption. The timer is equipped with an intuitive interface for setting the duration and visual feedback on the remaining time.
 
 ---
 
@@ -89,9 +89,8 @@ This project is a timer system for automatic poultry feeding with power-loss rec
 ---
 
 ## Example Usage Scenarios
-- **Cooking Timer**: Set precise durations for baking, boiling, or frying.
+- **Cooking Timer**: Set precise interval durations for feeding livestock.
 - **Study Sessions**: Use it as a Pomodoro timer for productivity.
-- **Exercise Timer**: Track workout durations effectively.
 
 ---
 
@@ -111,5 +110,3 @@ This project is a timer system for automatic poultry feeding with power-loss rec
 - Introduce a touchscreen interface for enhanced usability.
 
 ---
-
-This README provides all necessary details to set up and operate the timer system. Feel free to modify or enhance the project as per your requirements!
