@@ -1,7 +1,7 @@
 # Timer with Power-Loss Recovery and Alarm System
 
 ## Overview
-This project is a timer system with power-loss recovery, user-friendly controls, and a built-in alarm feature. It is designed to operate as a countdown timer with the ability to store and recover its state in the event of a power interruption. The timer is equipped with an intuitive interface for setting the duration and visual feedback on the remaining time, making it suitable for applications like cooking, study sessions, or general task management.
+This project is a timer system for automatic poultry feeding with power-loss recovery, user-friendly controls, and a built-in alarm feature. It is designed to operate as a countdown timer with the ability to store and recover its state in the event of a power interruption. The timer is equipped with an intuitive interface for setting the duration and visual feedback on the remaining time.
 
 ---
 
