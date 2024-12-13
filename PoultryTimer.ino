@@ -14,8 +14,8 @@ const int TIMER_RUNNING_ADDR = 5;
 // Pin Definitions
 const int POTENTIOMETER_PIN = A0;
 const int SERVO_PIN = 9;
-const int START_BUTTON_PIN = 2;
-const int LED_PIN = 13;
+const int START_BUTTON_PIN = 3;
+const int LED_PIN = 5;
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
@@ -75,7 +75,7 @@ void triggerAlarm() {
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("TIME'S UP!");
-  myServo.write(90);  // Move servo to 90 degrees
+  myServo.write(90);  // Move servo to 0 degrees
 }
 
 void displayTimerSetting() {
@@ -152,6 +152,10 @@ void resetTimer() {
   previousMinutes = -1;
   previousSeconds = -1;
   buttonPressStartTime = 0;
+  
+  // for (int i = 0 ; i < EEPROM.length() ; i++) {
+  //   EEPROM.write(i, 0);
+  // }
 
   displayRemainingTime(selectedHours, selectedMinutes, 0);
 }
@@ -164,14 +168,17 @@ void loop() {
     selectedHours = totalMinutes / 60;
     selectedMinutes = totalMinutes % 60;
 
-    digitalWrite(LED_PIN, millis() % 500 < 250 ? HIGH : LOW);  // Blink LED
+    // Blink LED only during setting mode
+    digitalWrite(LED_PIN, millis() % 600 < 300 ? HIGH : LOW);
 
+    // Update display only if values change
     if (initialStartup && (selectedHours != previousHours || selectedMinutes != previousMinutes)) {
       previousHours = selectedHours;
       previousMinutes = selectedMinutes;
       displayTimerSetting();
     }
 
+    // Handle short button press to start the timer
     if (isButtonPressed()) {
       timerDuration = (selectedHours * 3600L + selectedMinutes * 60L) * 1000L;
 
@@ -194,12 +201,13 @@ void loop() {
     int minutesLeft = (remainingTime % (3600L * 1000L)) / (60L * 1000L);
     int secondsLeft = (remainingTime % (60L * 1000L)) / 1000L;
 
+    // Handle long press to return to setup mode
     if (digitalRead(START_BUTTON_PIN) == LOW) {
       if (buttonPressStartTime == 0) {
         buttonPressStartTime = currentTime;
       }
 
-      if (currentTime - buttonPressStartTime >= 5000) {
+      if (currentTime - buttonPressStartTime >= 3000) {
         backToSetting = true;
         settingTimer = true;
         initialStartup = true;
@@ -208,7 +216,7 @@ void loop() {
         return;
       }
     } else {
-      buttonPressStartTime = 0;
+      buttonPressStartTime = 0;  // Reset button press time when released
     }
 
     EEPROM.write(REMAINING_HOURS_ADDR, hoursLeft);
